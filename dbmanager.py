@@ -6,14 +6,13 @@ class DBManager:
     Класс для создания и наполнения базы данных, а также взаимодействия при помощи СУБД Postgres.
     """
 
-    def __init__(self):
+    def __init__(self, db_name: str, params: dict):
         """
         Конструктор класса
         """
-        self.conn = psycopg2.connect(host='localhost',
-                                     database='hhbase',
-                                     user='postgres',
-                                     password='25041988')
+        self.db_name = db_name
+        self.params = params
+        self.conn = psycopg2.connect(dbname='postgres', **self.params)
 
     def insert_data(self, temp_dict):
         """

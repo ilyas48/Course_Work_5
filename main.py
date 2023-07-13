@@ -1,5 +1,5 @@
 from headhunter import HeadHunter
-
+from config import config
 from dbmanager import DBManager
 
 employers_id = [1740, 2180, 3529, 8550, 39305, 41862, 64174, 67611, 78638, 87021]
@@ -11,7 +11,8 @@ def main():
     print("Может занять некоторое время!\n")
     for id_employer in employers_id:
         hh = HeadHunter(id_employer)
-        db = DBManager()
+        params = config()
+        db = DBManager('postgres', params)
         hh.get_vacancy(3)
         db.insert_data(hh.format_employer())
         db.get_insert_vacancies(hh.format_vacancies())
